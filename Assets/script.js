@@ -1,24 +1,24 @@
-/* 
-When loading your app the current day will be displayed.
-The page will show all the timeblocks for a standard busness day.
-Each timeblock should be color coded to indicate whether it is in the past, present, or future.
-A user can enter an event by clicking on a timeblock.
-Saving an event is saved in local storage.
-Saved events will persist when refreshing or closing the browser.
-*/
+
 $(document).ready(function(){
 
-// Displays today's date to Weekday, Month day+suffix
+// Define global variables
 let currentDayEl = $("#currentDay");
 let saveBtnEl = $(".saveBtn");
-let descriptionEl = $(".description");
+//let descriptionEl = $(".description");
 let textAreaEl = $("textarea");
 let currentHour = parseInt(moment().format("H"));
 let todaysDate = moment().format("dddd, " + "MMMM Do YYYY");
+//let timeBlock = $(".time-block");
+let plans = JSON.parse(localStorage.getItem("plans")) || [];
+let arrowRight = $(".right");
+let arrowLeft = $(".left");
+
+// Displays today's date to Weekday, Month day+suffix
 currentDayEl.text(`${todaysDate}`);
 
-console.log(currentHour);
+//console.log(currentHour);
 
+// Compares the name attribute of each textarea to the current hour using moment and parseInt to turn each value to number
 textAreaEl.each(function(){
     let nameAtt= parseInt($(this).attr("name"));
 
@@ -32,7 +32,33 @@ textAreaEl.each(function(){
 
 });
 
+// Add click even to saveBtn's, takes the value of the sibling at description for the text and the attribute Id to include the time.
+saveBtnEl.on("click", function(){
+    let planEl = $(this).siblings(".description").val();
+    let planTime = $(this).siblings(".description").attr("id");
+    console.log(planEl);
+    console.log(planTime);
+    
+// Create plan object
+    let planOb = {
+        text: planEl,
+        time: planTime
+    };
+    
+    // Pushes planOb into plans array
+    plans.push(planOb);
 
+   localStorage.setItem("plans", JSON.stringify(plans));
+    
+ 
+});
+
+for (let i = 0; i < plans.length; i++){
+    let currentText = plans[i].text;
+    let currentTime = plans[i].time; // -> #9
+
+    $(`#${currentTime}`).val(currentText);
+}
 
 });
 

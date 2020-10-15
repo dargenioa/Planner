@@ -4,23 +4,20 @@ $(document).ready(function(){
 // Define global variables
 let currentDayEl = $("#currentDay");
 let saveBtnEl = $(".saveBtn");
-//let descriptionEl = $(".description");
 let textAreaEl = $("textarea");
 let currentHour = parseInt(moment().format("H"));
 let todaysDate = moment().format("dddd, " + "MMMM Do YYYY");
-//let timeBlock = $(".time-block");
 let plans = JSON.parse(localStorage.getItem("plans")) || [];
-let arrowRight = $(".right");
-let arrowLeft = $(".left");
+
 
 // Displays today's date to Weekday, Month day+suffix
 currentDayEl.text(`${todaysDate}`);
 
-//console.log(currentHour);
+console.log(currentHour);
 
 // Compares the name attribute of each textarea to the current hour using moment and parseInt to turn each value to number
 textAreaEl.each(function(){
-    let nameAtt= parseInt($(this).attr("name"));
+    let nameAtt = parseInt($(this).attr("name"));
 
     if (currentHour > nameAtt){
        $(this).addClass("past");

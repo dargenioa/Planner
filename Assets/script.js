@@ -29,7 +29,7 @@ textAreaEl.each(function(){
 
 });
 
-// Add click even to saveBtn's, takes the value of the sibling at description for the text and the attribute Id to include the time.
+// Add click event to saveBtn's, takes the value of the sibling at description for the text and the attribute Id to include the time.
 saveBtnEl.on("click", function(){
     let planEl = $(this).siblings(".description").val();
     let planTime = $(this).siblings(".description").attr("id");

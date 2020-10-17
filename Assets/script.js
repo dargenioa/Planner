@@ -52,7 +52,7 @@ saveBtnEl.on("click", function(){
 
 for (let i = 0; i < plans.length; i++){
     let currentText = plans[i].text;
-    let currentTime = plans[i].time; // -> #9
+    let currentTime = plans[i].time; 
 
     $(`#${currentTime}`).val(currentText);
 }
